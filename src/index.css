@@ -1,13 +1,112 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Fonts (optional) — you can add Inter or system fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg: #0b0c0f;
+  --panel: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --accent: #6ea8ff;
+  --muted: rgba(255,255,255,0.55);
+  --glass-blur: 10px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; margin: 0; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(110,168,255,0.04), transparent), var(--bg); color: #fff; }
+
+.app-root { min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 40px 20px; }
+
+/* container */
+.container { width: 100%; max-width: 1100px; display:flex; flex-direction:column; gap:18px; align-items:stretch; }
+
+/* Glass panel */
+.panel.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+/* Title */
+.title { margin: 0; font-size: 26px; letter-spacing: -0.3px; }
+.subtitle { margin: 6px 0 16px 0; color: var(--muted); font-size: 14px; }
+
+/* dropzone */
+.dropzone { border-radius: 12px; overflow: hidden; }
+.dropzone-inner {
+  border: 1px dashed rgba(255,255,255,0.06);
+  padding: 18px;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.dropzone-inner:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+
+.upload-icon { color: var(--accent); opacity: .95; }
+
+/* hint */
+.hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+/* controls */
+.controls { display:flex; gap:10px; margin-top: 12px; }
+.btn {
+  background: linear-gradient(180deg, rgba(110,168,255,0.14), rgba(110,168,255,0.08));
+  border: 1px solid rgba(110,168,255,0.12);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor:pointer;
+  font-weight:600;
+  transition: transform .12s ease, opacity .12s;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* loader */
+.loader {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* preview area */
+.preview-area { display:flex; gap:18px; margin-top:18px; align-items:flex-start; flex-wrap:wrap; }
+.img-wrap { position: relative; flex:1 1 640px; min-width: 280px; border-radius: 12px; overflow: hidden; background: #050506; border: 1px solid rgba(255,255,255,0.04); }
+.preview-img { display:block; max-width:100%; width:100%; height:auto; object-fit:contain; }
+.preview-canvas { position:absolute; left:0; top:0; pointer-events: none; }
+
+/* info panel */
+.info-panel { width: 320px; padding: 12px; display:flex; flex-direction:column; gap:12px; }
+.info-panel h3 { margin: 0; }
+.table { max-height: 320px; overflow:auto; }
+table { width:100%; border-collapse: collapse; font-size: 14px; color: #fff; }
+th, td { text-align:left; padding:8px 6px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.muted { color: var(--muted); font-size: 13px; }
+.small { padding: 10px; border-radius: 10px; }
+
+/* footer */
+.footer { margin-top: 10px; color: var(--muted); text-align:center; font-size: 13px; }
+
+/* errors */
+.error { color: #ff8484; margin-top: 10px; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .preview-area { flex-direction: column; }
+  .info-panel { width: 100%; order:2; }
+  .img-wrap { order:1; }
 }
