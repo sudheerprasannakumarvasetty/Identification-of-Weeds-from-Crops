@@ -212,7 +212,7 @@ export default function WeedDetection() {
         </div>
       </div>
 
-      <footer className="footer">Built locally • Black theme • Glass UI</footer>
+      <footer className="footer">Built by SudheerVasetty</footer>
     </div>
   );
 }
